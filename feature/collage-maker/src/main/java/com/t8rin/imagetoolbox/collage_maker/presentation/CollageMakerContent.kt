@@ -40,7 +40,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.rememberLazyListState
-import com.t8rin.imagetoolbox.core.resources.Icons
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SheetValue
@@ -75,10 +74,11 @@ import com.t8rin.colors.util.roundToTwoDigits
 import com.t8rin.imagetoolbox.collage_maker.presentation.screenLogic.CollageMakerComponent
 import com.t8rin.imagetoolbox.core.domain.image.model.ImageFormatGroup
 import com.t8rin.imagetoolbox.core.domain.model.DomainAspectRatio
+import com.t8rin.imagetoolbox.core.resources.Icons
 import com.t8rin.imagetoolbox.core.resources.R
 import com.t8rin.imagetoolbox.core.resources.icons.Add
-import com.t8rin.imagetoolbox.core.resources.icons.AutoAwesomeMosaic
 import com.t8rin.imagetoolbox.core.resources.icons.BackgroundColor
+import com.t8rin.imagetoolbox.core.resources.icons.Collage
 import com.t8rin.imagetoolbox.core.resources.icons.Delete
 import com.t8rin.imagetoolbox.core.resources.icons.FormatLineSpacing
 import com.t8rin.imagetoolbox.core.resources.icons.ImageReset
@@ -148,7 +148,7 @@ fun CollageMakerContent(
                         R.string.pick_up_to_n_collage_images,
                         CollageConstants.MAX_IMAGE_COUNT,
                     ),
-                    icon = Icons.Outlined.AutoAwesomeMosaic
+                    icon = Icons.Outlined.Collage
                 )
             }
         }
@@ -168,7 +168,7 @@ fun CollageMakerContent(
                 } else {
                     getString(R.string.pick_at_least_two_images)
                 },
-                icon = Icons.Outlined.AutoAwesomeMosaic
+                icon = Icons.Outlined.Collage
             )
         }
     }
