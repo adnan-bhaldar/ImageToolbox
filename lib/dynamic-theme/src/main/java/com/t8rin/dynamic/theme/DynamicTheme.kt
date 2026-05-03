@@ -546,7 +546,7 @@ class DynamicThemeState(
         val colorMatrix = ColorMatrix()
         colorMatrix.setSaturation(saturation)
         val filter = ColorMatrixColorFilter(colorMatrix)
-        paint.setColorFilter(filter)
+        paint.colorFilter = filter
         canvasResult.drawBitmap(src, 0f, 0f, paint)
         return@withContext bitmapResult
     }
