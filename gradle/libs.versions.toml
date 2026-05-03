@@ -90,8 +90,10 @@ lifecycle = "2.11.0-beta01"
 firebaseBom = "34.12.0"
 firebaseCrashlyticsGradle = "3.0.7"
 junit = "4.13.2"
+coilResvg = "1.0.0"
 
 [libraries]
+coil-resvg = { module = "com.hashsequence:coil-resvg", version.ref = "coilResvg" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
@@ -159,7 +161,6 @@ ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 coilNetwork = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
 coilCompose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coilGif = { module = "io.coil-kt.coil3:coil-gif", version.ref = "coil" }
-coilSvg = { module = "io.coil-kt.coil3:coil-svg", version.ref = "coil" }
 coil = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
 
 jxl-coder-coil = { module = "io.github.awxkee:jxl-coder-coil", version.ref = "jxlCoderCoil" }

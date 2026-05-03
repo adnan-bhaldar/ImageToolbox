@@ -63,11 +63,7 @@ dependencies {
     api(libs.konfetti.compose)
 
     //Coil
-    api(libs.coil)
     api(libs.coilCompose)
-    api(libs.coilGif)
-    api(libs.coilSvg)
-    api(libs.coilNetwork)
     api(libs.ktor)
 
     //Modules

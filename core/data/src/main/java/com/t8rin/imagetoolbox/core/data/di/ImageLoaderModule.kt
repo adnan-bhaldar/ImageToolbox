@@ -33,11 +33,11 @@ import coil3.network.ktor3.KtorNetworkFetcherFactory
 import coil3.request.allowHardware
 import coil3.request.maxBitmapSize
 import coil3.size.Size
-import coil3.svg.SvgDecoder
 import coil3.util.Logger
 import com.awxkee.jxlcoder.coil.AnimatedJxlDecoder
 import com.gemalto.jp2.coil.Jpeg2000Decoder
 import com.github.awxkee.avifcoil.decoder.HeifDecoder
+import com.hashsequence.coilresvg.ResvgDecoder
 import com.t8rin.awebp.coil.AnimatedWebPDecoder
 import com.t8rin.djvu_coder.coil.DjvuDecoder
 import com.t8rin.imagetoolbox.core.data.coil.Base64Fetcher
@@ -115,7 +115,7 @@ internal object ImageLoaderModule {
                 add(GifDecoder.Factory())
                 add(AnimatedWebPDecoder.Factory())
             }
-            add(SvgDecoder.Factory())
+            add(ResvgDecoder.Factory())
             if (Build.VERSION.SDK_INT >= 24) {
                 add(HeifDecoder.Factory())
             }

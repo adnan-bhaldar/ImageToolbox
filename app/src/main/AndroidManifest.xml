@@ -18,7 +18,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-sdk tools:overrideLibrary="com.github.awxkee.avifcodercoil, com.github.awxkee.avifcoder, com.google.mlkit.vision.segmentation.subject, androidx.pdf,androidx.pdf.viewer.fragment, androidx.pdf.document.service" />
+    <uses-sdk tools:overrideLibrary="com.github.awxkee.avifcodercoil, com.github.awxkee.avifcoder, com.google.mlkit.vision.segmentation.subject, androidx.pdf,androidx.pdf.viewer.fragment, androidx.pdf.document.service, com.hashsequence.coilresvg, ai.onnxruntime" />
 
     <uses-feature
         android:name="android.hardware.camera"

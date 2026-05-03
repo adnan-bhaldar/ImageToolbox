@@ -82,7 +82,6 @@ android {
             signingConfig = signingConfigs.getByName("debug")
             matchingFallbacks += listOf("release")
             isMinifyEnabled = false
-            isShrinkResources = false
         }
     }
 
@@ -159,13 +158,6 @@ dependencies {
     "fossImplementation"(libs.quickie.foss)
 }
 
-dependencySubstitution {
-    substitute(
-        dependency = "com.caverock:androidsvg-aar:1.4",
-        using = "com.github.deckerst:androidsvg:cc9d59a88f"
-    )
-}
-
 afterEvaluate {
     android.productFlavors.forEach { flavor ->
         tasks.matching { task ->
@@ -180,19 +172,4 @@ afterEvaluate {
             task.enabled = flavor.extra.get("gmsEnabled") == true
         }
     }
-}
-
-fun Project.dependencySubstitution(action: DependencySubstitutions.() -> Unit) {
-    allprojects {
-        configurations.all {
-            resolutionStrategy.dependencySubstitution(action)
-        }
-    }
-}
-
-fun DependencySubstitutions.substitute(
-    dependency: String,
-    using: String
-) {
-    substitute(module(dependency)).using(module(using))
 }

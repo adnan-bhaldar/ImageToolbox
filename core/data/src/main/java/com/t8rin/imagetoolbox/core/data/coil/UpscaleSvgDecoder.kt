@@ -1,6 +1,6 @@
 /*
  * ImageToolbox is an image editor for android
- * Copyright (c) 2024 T8RIN (Malik Mukhametzyanov)
+ * Copyright (c) 2026 T8RIN (Malik Mukhametzyanov)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,22 +19,22 @@ package com.t8rin.imagetoolbox.core.data.coil
 
 import coil3.ImageLoader
 import coil3.decode.DecodeResult
-import coil3.decode.DecodeUtils
 import coil3.decode.Decoder
 import coil3.decode.ImageSource
 import coil3.fetch.SourceFetchResult
 import coil3.request.Options
 import coil3.size.Size
 import coil3.size.pxOrElse
-import coil3.svg.SvgDecoder
-import coil3.svg.isSvg
+import com.hashsequence.coilresvg.ResvgDecoder
+import okio.BufferedSource
+import okio.ByteString.Companion.encodeUtf8
 
 internal class UpscaleSvgDecoder(
     private val source: ImageSource,
     private val options: Options
 ) : Decoder {
 
-    override suspend fun decode(): DecodeResult = SvgDecoder(
+    override suspend fun decode(): DecodeResult = ResvgDecoder(
         source = source,
         options = options.copy(
             size = options.size.coerceAtLeast(2048)
@@ -54,15 +54,27 @@ internal class UpscaleSvgDecoder(
             options: Options,
             imageLoader: ImageLoader
         ): Decoder? {
-            if (!isApplicable(result)) return null
+            if (!isSvg(result.source.source(), result.mimeType)) return null
+
             return UpscaleSvgDecoder(
                 source = result.source,
                 options = options
             )
         }
 
-        private fun isApplicable(result: SourceFetchResult): Boolean {
-            return result.mimeType == "image/svg+xml" || DecodeUtils.isSvg(result.source.source())
+        private fun isSvg(source: BufferedSource, mimeType: String?): Boolean {
+            return mimeType == MIME_TYPE_SVG ||
+                    mimeType == MIME_TYPE_XML ||
+                    (source.rangeEquals(0, LEFT_ANGLE_BRACKET) &&
+                            source.indexOf(SVG_TAG, 0, SVG_DETECT_BUFFER_SIZE) != -1L)
+        }
+
+        private companion object {
+            private const val MIME_TYPE_SVG = "image/svg+xml"
+            private const val MIME_TYPE_XML = "text/xml"
+            private const val SVG_DETECT_BUFFER_SIZE = 1024L
+            private val SVG_TAG = "<svg".encodeUtf8()
+            private val LEFT_ANGLE_BRACKET = "<".encodeUtf8()
         }
     }
 
