@@ -157,18 +157,24 @@ dependencies {
     "fossImplementation"(libs.quickie.foss)
 }
 
-afterEvaluate {
-    android.productFlavors.forEach { flavor ->
-        tasks.matching { task ->
-            listOf("GoogleServices", "Crashlytics").any {
-                task.name.contains(it)
-            }.and(
-                task.name.contains(
-                    flavor.name.replaceFirstChar(Char::uppercase)
-                )
-            )
-        }.forEach { task ->
-            task.enabled = flavor.extra.get("gmsEnabled") == true
+androidComponents {
+    beforeVariants(selector().all()) { variantBuilder ->
+        val flavorName = variantBuilder.productFlavors.firstOrNull()?.second.orEmpty()
+        val flavorCap = flavorName.replaceFirstChar(Char::uppercase)
+
+        val gmsEnabled = android.productFlavors
+            .findByName(flavorName)
+            ?.extra
+            ?.get("gmsEnabled") == true
+
+        tasks.configureEach {
+            val isTargetTask = listOf("GoogleServices", "Crashlytics").any { marker ->
+                name.contains(marker)
+            } && name.contains(flavorCap)
+
+            if (isTargetTask) {
+                enabled = gmsEnabled
+            }
         }
     }
 }
