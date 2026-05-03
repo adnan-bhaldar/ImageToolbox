@@ -323,17 +323,6 @@ sealed class ImageFormat(
             else -> Default
         }
 
-        val highLevelFormats by lazy {
-            listOf(
-                Avif.Lossy,
-                Avif.Lossless,
-                Heic.Lossy,
-                Heic.Lossless,
-                Heif.Lossy,
-                Heif.Lossless
-            )
-        }
-
         val entries by lazy {
             listOf(
                 Jpg,

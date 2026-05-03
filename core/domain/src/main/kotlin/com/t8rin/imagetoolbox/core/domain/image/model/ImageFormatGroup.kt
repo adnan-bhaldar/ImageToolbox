@@ -141,13 +141,6 @@ sealed class ImageFormatGroup(
                 Gif
             )
 
-        val highLevelFormats by lazy {
-            listOf(
-                Avif,
-                Heic
-            )
-        }
-
         fun fromFormat(
             imageFormat: ImageFormat
         ): ImageFormatGroup = entries.first { imageFormat in it.formats }

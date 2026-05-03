@@ -19,7 +19,6 @@
 
 package com.t8rin.imagetoolbox.core.ui.widget.controls.selection
 
-import android.os.Build
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
@@ -31,7 +30,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import com.t8rin.imagetoolbox.core.resources.Icons
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -56,6 +54,7 @@ import com.t8rin.imagetoolbox.core.domain.image.model.ImageFormatGroup
 import com.t8rin.imagetoolbox.core.domain.image.model.Quality
 import com.t8rin.imagetoolbox.core.domain.image.model.alphaContainedEntries
 import com.t8rin.imagetoolbox.core.domain.utils.ListUtils.rightFrom
+import com.t8rin.imagetoolbox.core.resources.Icons
 import com.t8rin.imagetoolbox.core.resources.R
 import com.t8rin.imagetoolbox.core.resources.icons.FileReplace
 import com.t8rin.imagetoolbox.core.resources.icons.ImagesearchRoller
@@ -141,9 +140,9 @@ fun ImageFormatSelector(
             }
         }
         val filteredFormats = if (enableItemsCardBackground) {
-            formats.filteredFormats()
+            formats
         } else {
-            allFormats.filteredFormats()
+            allFormats
         }
 
         val enableBackgroundColorForAlphaFormats =
@@ -170,7 +169,7 @@ fun ImageFormatSelector(
                 title(this)
 
                 AnimatedContent(
-                    targetState = entries.filtered(),
+                    targetState = entries,
                     modifier = Modifier.fillMaxWidth()
                 ) { items ->
                     FlowRow(
@@ -375,16 +374,4 @@ fun ImageFormatSelector(
 
         if (enableItemsCardBackground) Spacer(Modifier.height(4.dp))
     }
-}
-
-@Composable
-private fun List<ImageFormatGroup>.filtered(): List<ImageFormatGroup> = remember(this) {
-    if (Build.VERSION.SDK_INT <= 24) this - ImageFormatGroup.highLevelFormats.toSet()
-    else this
-}
-
-@Composable
-private fun List<ImageFormat>.filteredFormats(): List<ImageFormat> = remember(this) {
-    if (Build.VERSION.SDK_INT <= 24) this - ImageFormat.highLevelFormats.toSet()
-    else this
 }
